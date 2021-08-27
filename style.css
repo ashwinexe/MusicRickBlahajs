@@ -1,0 +1,15 @@
+body {
+    background-color: #F7F6F8;
+}
+
+.card {
+    background-color: #49B4D3;
+    width: 150px;
+    height: 200px;
+    display: grid;
+    place-items: center;
+}
+
+.card img {
+    width: 100px;
+}
