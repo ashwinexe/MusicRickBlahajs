@@ -1,48 +1,48 @@
 const tasks = [
     {
         id : 1,
-        title : "Sing a pop song",
+        title : "Pop",
         link : "https://www.youtube.com/playlist?list=PL8D4Iby0Bmm94U_rwuJuocyC1xFoPTd5R"
     },
     {
         id : 2,
-        title : "Sing a rock song",
+        title : "Rock",
         link : "https://www.youtube.com/playlist?list=PLnQkhlhB0C9yppF4HlBSYsdgwZ86CiX2l"
     },
     {
         id : 3,
-        title : "Sing a pop song",
-        link : "https://www.youtube.com/playlist?list=PL8D4Iby0Bmm94U_rwuJuocyC1xFoPTd5R"
+        title : "90s hit",
+        link : "https://www.youtube.com/playlist?list=PLtU_eILiw-sjeqxurJu7HDQi_v14yz8NE"
     },
     {
         id : 4,
-        title : "Sing a rock song",
-        link : "https://www.youtube.com/playlist?list=PLnQkhlhB0C9yppF4HlBSYsdgwZ86CiX2l"
+        title : "Taylor Swift",
+        link : "https://www.youtube.com/playlist?list=PLElqELnq3veWkssPWBf-VatKqDjCdsdDk"
     },
     {
         id : 5,
-        title : "Sing a pop song",
-        link : "https://www.youtube.com/playlist?list=PL8D4Iby0Bmm94U_rwuJuocyC1xFoPTd5R"
+        title : "One Direction",
+        link : "https://www.youtube.com/playlist?list=PL8D4Iby0Bmm-273NtcP5dAk1T5DcZuXIS"
     },
     {
         id : 6,
-        title : "Sing a rock song",
-        link : "https://www.youtube.com/playlist?list=PLnQkhlhB0C9yppF4HlBSYsdgwZ86CiX2l"
+        title : "Christmas",
+        link : "https://www.youtube.com/playlist?list=PL_3dlGnPgUZgi_nUT-2Ga-nPshz9838r7"
     },
     {
         id : 7,
-        title : "Sing a pop song",
-        link : "https://www.youtube.com/playlist?list=PL8D4Iby0Bmm94U_rwuJuocyC1xFoPTd5R"
+        title : "R&B",
+        link : "https://www.youtube.com/playlist?list=PL_3dlGnPgUZiEPrB-0JLNI9YDg-47vovt"
     },
     {
         id : 8,
-        title : "Sing a rock song",
-        link : "https://www.youtube.com/playlist?list=PLnQkhlhB0C9yppF4HlBSYsdgwZ86CiX2l"
+        title : "Disney",
+        link : "https://www.youtube.com/playlist?list=PLznIx3_zY-TwVNgCbWgXZfk5kpl59pBxE"
     },
     {
         id : 9,
-        title : "Sing a rock song",
-        link : "https://www.youtube.com/playlist?list=PLnQkhlhB0C9yppF4HlBSYsdgwZ86CiX2l"
+        title : "Party Starters",
+        link : "https://www.youtube.com/playlist?list=PL8D4Iby0Bmm-uQIcbRfHeUMd_YDSZDA39"
     },
     {
         id : 10,
