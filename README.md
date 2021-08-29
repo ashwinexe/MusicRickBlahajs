@@ -1,4 +1,5 @@
-# SharkHacks3
+# Music Rick Blahajs
+for SharkHacks3
 
 ## Inspiration
 We wanted to build a hack that is very silly, fun and full of Blahaj. And this got us thinking that what can be better than a party game that includes both Blahaj and Rick Rolling. And thus we came up with the most *sharkiest* and *silliest* party game of all time!
