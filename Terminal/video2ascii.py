@@ -2,6 +2,7 @@ import os
 import sys
 import cv2
 from PIL import Image
+import imageio
 import time
 
 ASCII_CHARS = ["@", "#", "S", "%", "?", "*", "+", ";", ":", ",", "."]
@@ -27,7 +28,20 @@ def generate_frame(image,new_width=70):
 
 if __name__=="__main__":
     capture = cv2.VideoCapture("video.mp4")
+    image_list = []
+    framesCaptured = 0
     while True:
         ret,frame = capture.read()
         generate_frame(Image.fromarray(frame))
-        cv2.waitKey(1)
+        cv2.waitKey(10)
+        if framesCaptured <= 3000:
+            image_list.append(frame)
+            framesCaptured +=1 
+        else:
+            break
+     
+
+    capture.release()
+    cv2.destroyAllWindows()
+    imageio.mimsave("saved.gif",image_list,fps=60)
+
