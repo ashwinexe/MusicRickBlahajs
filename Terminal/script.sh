@@ -1,6 +1,12 @@
 # Play Video as ASCII in Terminal
 
 
+# Change this path 
+Current_Path=`pwd`
+User_Path='/home/vijay/Desktop/projects/hackathons/sharkhacks3/SharkHacks3/Terminal'
+
+cd $User_Path
+
 # Remove all existing video files
 rm *.mp4
 
@@ -9,6 +15,7 @@ pip3 install opencv-python
 pip3 install video-to-ascii 
 pip3 install opencv-contrib-python==4.4.0.42
 pip3 install Pillow==7.2.0
+pip3 install imageio
 
 # Create a symlink
 sudo ln -s /usr/bin/python3 /usr/bin/python
@@ -24,7 +31,9 @@ mv *.mp4 video.mp4
 
 # Run the python files
 python video2ascii.py
- 
+
+# Go back to existing directory
+cd $Current_Path
 
 
 
