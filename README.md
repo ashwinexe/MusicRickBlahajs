@@ -20,5 +20,5 @@ The biggest achievement was getting all the parts of the project running as they
 ## What we learned
 We learned how chill one can stay during a hackathon and just not allow a project to stress us. The true joy of having fun in a hackathon dedicated to our beloved Blahaj, Smolhag, and other friendly plushie Sharks in general. 
 
-## What's next for Untitled
+## What's next for Musical Rick Blahajs
 As the saying goes that possibilities are endless when we are willing to improve something. And when it comes to a party game, we can have a list of things that we can do in future to make it more enjoyable. Maybe find a way for including more players, more karoke dares, and make the game longer and even more silly. 
