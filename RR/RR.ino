@@ -1,5 +1,7 @@
 #include <Arduino.h>
 #include <U8x8lib.h>
+#include "Seeed_BMP280.h"
+#include <Wire.h>
 
 #define NOTE_B0  31
 #define NOTE_C1  33
@@ -147,36 +149,7 @@ int melody[] = {
   REST,8, NOTE_CS5,8, NOTE_B4,8, NOTE_A4,-4, REST,4,
   REST,8, NOTE_B4,8, NOTE_B4,8, NOTE_CS5,8, NOTE_D5,8, NOTE_B4,8, NOTE_A4,4,
   REST,8, NOTE_A5,8, NOTE_A5,8, NOTE_E5,8, NOTE_FS5,8, NOTE_E5,8, NOTE_D5,8,
-  
-  REST,8, NOTE_A4,8, NOTE_B4,8, NOTE_CS5,8, NOTE_D5,8, NOTE_B4,8, //29
-  REST,8, NOTE_CS5,8, NOTE_B4,8, NOTE_A4,-4, REST,4,
-  NOTE_B4,8, NOTE_B4,8, NOTE_CS5,8, NOTE_D5,8, NOTE_B4,8, NOTE_A4,4, REST,8,
-  REST,8, NOTE_E5,8, NOTE_E5,8, NOTE_FS5,4, NOTE_E5,-4, 
-  NOTE_D5,2, NOTE_D5,8, NOTE_E5,8, NOTE_FS5,8, NOTE_E5,4, 
-  NOTE_E5,8, NOTE_E5,8, NOTE_FS5,8, NOTE_E5,8, NOTE_A4,8, NOTE_A4,4,
-
-  REST,-4, NOTE_A4,8, NOTE_B4,8, NOTE_CS5,8, NOTE_D5,8, NOTE_B4,8, //35
-  REST,8, NOTE_E5,8, NOTE_FS5,8, NOTE_E5,-4, NOTE_A4,16, NOTE_B4,16, NOTE_D5,16, NOTE_B4,16,
-  NOTE_FS5,-8, NOTE_FS5,-8, NOTE_E5,-4, NOTE_A4,16, NOTE_B4,16, NOTE_D5,16, NOTE_B4,16,
-  NOTE_E5,-8, NOTE_E5,-8, NOTE_D5,-8, NOTE_CS5,16, NOTE_B4,8, NOTE_A4,16, NOTE_B4,16, NOTE_D5,16, NOTE_B4,16,
-  NOTE_D5,4, NOTE_E5,8, NOTE_CS5,-8, NOTE_B4,16, NOTE_A4,4, NOTE_A4,8, 
-
-   NOTE_E5,4, NOTE_D5,2, NOTE_A4,16, NOTE_B4,16, NOTE_D5,16, NOTE_B4,16, //40
-  NOTE_FS5,-8, NOTE_FS5,-8, NOTE_E5,-4, NOTE_A4,16, NOTE_B4,16, NOTE_D5,16, NOTE_B4,16,
-  NOTE_A5,4, NOTE_CS5,8, NOTE_D5,-8, NOTE_CS5,16, NOTE_B4,8, NOTE_A4,16, NOTE_B4,16, NOTE_D5,16, NOTE_B4,16,
-  NOTE_D5,4, NOTE_E5,8, NOTE_CS5,-8, NOTE_B4,16, NOTE_A4,4, NOTE_A4,8,  
-  NOTE_E5,4, NOTE_D5,2, NOTE_A4,16, NOTE_B4,16, NOTE_D5,16, NOTE_B4,16,
-   
-  NOTE_FS5,-8, NOTE_FS5,-8, NOTE_E5,-4, NOTE_A4,16, NOTE_B4,16, NOTE_D5,16, NOTE_B4,16, //45
-  NOTE_A5,4, NOTE_CS5,8, NOTE_D5,-8, NOTE_CS5,16, NOTE_B4,8, NOTE_A4,16, NOTE_B4,16, NOTE_D5,16, NOTE_B4,16,
-  NOTE_D5,4, NOTE_E5,8, NOTE_CS5,-8, NOTE_B4,16, NOTE_A4,4, NOTE_A4,8,  
-  NOTE_E5,4, NOTE_D5,2, NOTE_A4,16, NOTE_B4,16, NOTE_D5,16, NOTE_B4,16,
-  NOTE_FS5,-8, NOTE_FS5,-8, NOTE_E5,-4, NOTE_A4,16, NOTE_B4,16, NOTE_D5,16, NOTE_B4,16, //45
-  
-  NOTE_A5,4, NOTE_CS5,8, NOTE_D5,-8, NOTE_CS5,16, NOTE_B4,8, NOTE_A4,16, NOTE_B4,16, NOTE_D5,16, NOTE_B4,16,
-  NOTE_D5,4, NOTE_E5,8, NOTE_CS5,-8, NOTE_B4,16, NOTE_A4,4, NOTE_A4,8, 
-
-  NOTE_E5,4, NOTE_D5,2, REST,4
+ 
 };
 
 // sizeof gives the number of bytes, each int value is composed of two bytes (16 bits)
@@ -190,7 +163,13 @@ int divider = 0, noteDuration = 0;
 int ledPin = 4;
 U8X8_SSD1306_128X64_NONAME_HW_I2C u8x8(/* reset=*/ U8X8_PIN_NONE);
 
+BMP280 bmp280;
+
 void setup() {
+  Serial.begin(9600);
+    if (!bmp280.init()) {
+        Serial.println("Device not connected or broken!");
+    }
   pinMode(buttonPin, INPUT);
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(ledPin, OUTPUT);
@@ -202,33 +181,45 @@ void loop() {
   buttonState = digitalRead(buttonPin);
   if (buttonState == HIGH) {
     // turn LED on:
-    if(on == false)
     {
     //here
 //      digitalWrite(ledPin, HIGH);
+      buttonState = LOW;
       rickRoll();
-      on = true;
     }
-    
-    else {
-    
-      on = false;
-      stopRR();
-    }
+  
   }
   
 }
 
 void stopRR(){
+  exit(0);
 }
 
 void rickRoll(){
+
+  float pressure;
+
   u8x8.begin();
 //  u8x8.setFlipMode(1);
   u8x8.setFont(u8x8_font_chroma48medium8_r);
     u8x8.setCursor(0, 0);
-    u8x8.println(F("Greatest"));
-    u8x8.print(F("RickRoll"));
+    u8x8.println("MPMC Lab Project :)");
+
+    //get and print temperatures
+    u8x8.print("Temp: ");
+    u8x8.print(bmp280.getTemperature());
+    u8x8.println("C"); // The unit for  Celsius because original arduino don't support speical symbols
+    //get and print atmospheric pressure data
+    u8x8.print("Pre: ");
+    u8x8.print(pressure = bmp280.getPressure());
+    u8x8.println("Pa");
+ 
+    //get and print altitude data
+    u8x8.print("Alt: ");
+    u8x8.print(bmp280.calcAltitude(pressure));
+    u8x8.println("m");
+
     u8x8.display();
   // iterate over the notes of the melody.
   // Remember, the array is twice the number of notes (notes + durations)
@@ -263,5 +254,14 @@ void rickRoll(){
 
     // stop the waveform generation before the next note.
     noTone(buzzer);
+
+    // buttonState = digitalRead(buttonPin);
+    buttonState = digitalRead(buttonPin);
+    Serial.print(buttonState);
+    Serial.print("hello");
+    if (buttonState == HIGH) {
+    // turn LED on:
+        stopRR();
+    }
   }
 }
